@@ -111,7 +111,7 @@ def gameloop():
             snake_x = snake_x + velocity_x
             snake_y = snake_y + velocity_y
 
-            if abs(snake_x - food_x)<14 and abs(snake_y - food_y)<14:
+            if abs(snake_x - food_x)<15 and abs(snake_y - food_y)<15:
                 score +=10
                 food_x = random.randint(20, screen_width / 2)
                 food_y = random.randint(20, screen_height / 2)
