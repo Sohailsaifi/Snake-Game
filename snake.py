@@ -1,3 +1,4 @@
+
 import pygame
 import random
 
@@ -28,6 +29,23 @@ def text_screen(text, color, x, y):
 def plot_snake(gameWindow, color, snk_list, snake_size):
     for x,y in snk_list:
         pygame.draw.rect(gameWindow, color, [x, y, snake_size, snake_size])
+
+def welcome():
+    exit_game = False
+    while not exit_game:
+        gameWindow.fill((233,210,229))
+        text_screen("Welcome to Snake Game", black, 220, 240)
+        text_screen("Press Space Bar To Play", black, 232, 290)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exit_game = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    gameloop()
+
+        pygame.display.update()
+        clock.tick(60)
+
 
 # Game Loop
 def gameloop():
@@ -62,7 +80,7 @@ def gameloop():
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        gameloop()
+                        welcome()
 
         else:
 
@@ -87,6 +105,9 @@ def gameloop():
                         velocity_y = init_velocity
                         velocity_x = 0
 
+                    if event.key == pygame.K_q:
+                        score +=10
+
             snake_x = snake_x + velocity_x
             snake_y = snake_y + velocity_y
 
@@ -99,7 +120,7 @@ def gameloop():
                     hiscore = score
 
             gameWindow.fill(white)
-            text_screen("Score: " + str(score) + "  High Score: "+str(hiscore), red, 5, 5)
+            text_screen("Score: " + str(score) + "       High Score: "+str(hiscore), red, 5, 5)
             pygame.draw.rect(gameWindow, red, [food_x, food_y, snake_size, snake_size])
 
 
@@ -122,5 +143,4 @@ def gameloop():
 
     pygame.quit()
     quit()
-gameloop()
-
+welcome()
