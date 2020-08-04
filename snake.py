@@ -90,7 +90,7 @@ def gameloop():
             with open("hiscore.txt", "w") as f:
                 f.write(str(hiscore))
             gameWindow.fill(white)
-            text_screen("Game Over! Press Enter To Continue", red, 100, 250)
+            text_screen("Game Over!   Press Enter To Continue", red, 100, 250)
             text_screen("score: "+str(score), red, 300, 290)
 
             for event in pygame.event.get():
