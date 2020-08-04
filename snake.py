@@ -2,7 +2,7 @@ import pygame
 import random
 import os
 
-
+pygame.mixer.init()
 
 pygame.init()
 
@@ -131,7 +131,8 @@ def gameloop():
             snake_y = snake_y + velocity_y
 
             if abs(snake_x - food_x)<15 and abs(snake_y - food_y)<15:
-
+                pygame.mixer.music.load('beep.mp3')
+                pygame.mixer.music.play()
                 score +=10
                 food_x = random.randint(30, screen_width / 1.5)
                 food_y = random.randint(30, screen_height / 1.5)
@@ -141,7 +142,7 @@ def gameloop():
 
             gameWindow.fill(white)
             gameWindow.blit(bgimg, (0, 0))
-            text_screen("Score: " + str(score) + "       High Score: "+str(hiscore), red, 5, 5)
+            text_screen("Score: " + str(score) + "  Hiscore: "+str(hiscore), red, 5, 5)
             pygame.draw.rect(gameWindow, red, [food_x, food_y, 20, 20])
 
 
@@ -155,11 +156,13 @@ def gameloop():
 
             if head in snk_list[:-1]:
                 game_over = True
-
+                pygame.mixer.music.load('gameover.mp3')
+                pygame.mixer.music.play()
 
             if snake_x<0 or snake_x>screen_width or snake_y<0 or snake_y>screen_height:
                 game_over = True
-
+                pygame.mixer.music.load('gameover.mp3')
+                pygame.mixer.music.play()
             plot_snake(gameWindow, black, snk_list, snake_size)
         pygame.display.update()
         clock.tick(fps)
